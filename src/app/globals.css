@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  /* Custom 'surface' color alias as requested in code usage */
+  --color-surface: hsl(var(--surface));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-fade-in-up: fade-in-up 0.5s ease-out;
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Forcing Dark Mode Palette by default */
+:root {
+  /* HSL values for #0B2E33 (Background) -> 187, 65%, 12% */
+  --background: 187 65% 12%;
+  /* HSL values for #B8E3E9 (Foreground/Highlight) -> 187, 50%, 82% */
+  --foreground: 187 50% 82%;
+
+  /* HSL values for #93B1B5 (Surface/Secondary) -> 187, 18%, 64% */
+  --surface: 187 18% 64%;
+
+  /* Card: Keeping dark for aesthetic, using borders/surface interactions for contrast */
+  --card: 187 65% 12%;
+  --card-foreground: 187 50% 82%;
+
+  --popover: 187 65% 12%;
+  --popover-foreground: 187 50% 82%;
+
+  /* Primary: #B8E3E9 */
+  --primary: 187 50% 82%;
+  --primary-foreground: 187 65% 12%;
+
+  /* Secondary: #93B1B5 -> 187, 18%, 64% */
+  --secondary: 187 18% 64%;
+  --secondary-foreground: 187 65% 12%;
+  /* Dark Text on Light Secondary */
+
+  /* Muted: Darker Teal */
+  --muted: 187 30% 20%;
+  --muted-foreground: 187 20% 60%;
+
+  /* Accent: #4F7C82 -> 187, 25%, 41% */
+  --accent: 187 25% 41%;
+  --accent-foreground: 187 50% 82%;
+
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+
+  /* Border: Accent color */
+  --border: 187 25% 41%;
+  --input: 187 25% 41%;
+  --ring: 187 50% 82%;
+
+  --radius: 0.5rem;
+}
+
+/* Dark mode override (same as root to force consistency) */
+.dark {
+  --background: 187 65% 12%;
+  --foreground: 187 50% 82%;
+
+  --surface: 187 18% 64%;
+
+  --card: 187 65% 12%;
+  --card-foreground: 187 50% 82%;
+
+  --popover: 187 65% 12%;
+  --popover-foreground: 187 50% 82%;
+
+  --primary: 187 50% 82%;
+  --primary-foreground: 187 65% 12%;
+
+  --secondary: 187 18% 64%;
+  --secondary-foreground: 187 65% 12%;
+
+  --muted: 187 30% 20%;
+  --muted-foreground: 187 20% 60%;
+
+  --accent: 187 25% 41%;
+  --accent-foreground: 187 50% 82%;
+
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 187 25% 41%;
+  --input: 187 25% 41%;
+  --ring: 187 50% 82%;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+    outline-color: var(--color-ring);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    @apply antialiased selection:bg-accent selection:text-accent-foreground;
+  }
+}
+
+/* Custom Utilities */
+.glass {
+  @apply bg-surface/10 backdrop-blur-md border border-white/10;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)];
+}
